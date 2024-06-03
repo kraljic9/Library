@@ -103,8 +103,6 @@ header {
     display: flex;
     flex-direction: column;
     gap: 5px;
-    width: 50%;
-    border: 1px solid red;
     width: 100%;
     align-items: center;
 }
