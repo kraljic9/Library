@@ -1,4 +1,3 @@
-
 const container = document.querySelector('#book-container');
 const addBtn = document.querySelector('#add-book');
 
@@ -7,6 +6,7 @@ const myLibrary = [
     
 ];
 
+// Constructor function for book //
 function Book(title, author, pages, read) {
     this.title = title;
     this.author = author;
@@ -14,11 +14,13 @@ function Book(title, author, pages, read) {
     this.read = read;
 }
 
-function addBookToLibrary(book) {
-    myLibrary.push(book);
+// Function to add book to library //
+function addBookToLibrary(newBook) {
+    myLibrary.push(newBook); // adds new book to the array//
     displayBooks()
 }
 
+// Function to display book //
 function displayBooks() {
     container.innerHTML = "";
 
@@ -45,16 +47,16 @@ function displayBooks() {
         removeBtn.classList.add('remove-btn');
         removeBtn.innerHTML = "REMOVE";
         removeBtn.addEventListener('click', () => {
-            myLibrary.splice(index, 1);
-            displayBooks();
+            myLibrary.splice(index, 1); // ensures that the right book is removed //
+            displayBooks(); //Refresh Container //
         })
 
         const toggleBtn = document.createElement('div');
         toggleBtn.classList.add('toggle-btn');
         toggleBtn.innerHTML = "Toggle";
         toggleBtn.addEventListener('click', () => {
-            book.read = !book.read;
-            displayBooks()
+            book.read = !book.read; // it toggles if book was read or not //
+            displayBooks() //Refresh Container//
         })
 
         container.appendChild(bookDiv);
@@ -70,13 +72,14 @@ function displayBooks() {
 
 displayBooks();
 
+// Function to create new book object //
 addBtn.addEventListener('click', () => {
     const title = prompt("Enter book title:");
     const author = prompt("Enter book author:");
     const pages = prompt("Enter number of pages:");
-    const read = confirm("Have you read it?");
+    const read = confirm("Have you read it?"); // colecting inormation for the book//
 
-    const newBook = new Book(title, author, pages, read);
+    const newBook = new Book(title, author, pages, read); //collected inputs are passed to the 'Book' constructor creating newBook object//
     addBookToLibrary(newBook);
 });
 
