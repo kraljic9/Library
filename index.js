@@ -1,10 +1,8 @@
 const container = document.querySelector('#book-container');
 const addBtn = document.querySelector('#add-book');
+const form = document.querySelector('#book-form')
 
-
-const myLibrary = [
-    
-];
+const myLibrary = [];
 
 // Constructor function for book //
 function Book(title, author, pages, read) {
@@ -70,17 +68,31 @@ function displayBooks() {
     });
 }
 
-displayBooks();
 
 // Function to create new book object //
 addBtn.addEventListener('click', () => {
-    const title = prompt("Enter book title:");
-    const author = prompt("Enter book author:");
-    const pages = prompt("Enter number of pages:");
-    const read = confirm("Have you read it?"); // colecting inormation for the book//
-
-    const newBook = new Book(title, author, pages, read); //collected inputs are passed to the 'Book' constructor creating newBook object//
-    addBookToLibrary(newBook);
+    form.style.visibility = 'visible';
 });
+
+// Handle form submission
+form.addEventListener('submit', (e) => {
+    e.preventDefault(); // Prevent form from submitting normally
+
+    const title = document.querySelector('#title-input').value;
+    const author = document.querySelector('#author').value;
+    const pages = document.querySelector('#pages').value;
+    const read = document.querySelector('#status').value === "read" || "not read"; // Check the selected option
+
+    const newBook = new Book(title, author, pages, read);
+    addBookToLibrary(newBook);
+
+    // Clear the form after submission and hide it
+    form.reset();
+    form.style.visibility = 'hidden';
+});
+
+// Initial display of books
+displayBooks();
+
 
 
